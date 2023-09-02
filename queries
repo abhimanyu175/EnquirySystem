@@ -1,0 +1,56 @@
+-- Create the database
+CREATE DATABASE enquiry_db;
+
+-- Use the database
+USE enquiry_db;
+
+-- Create the courses table
+CREATE TABLE courses (
+  cid VARCHAR(50) NOT NULL,
+  cname VARCHAR(100) NOT NULL,
+  cdescription TEXT,
+  PRIMARY KEY (cid)
+);
+
+
+
+-- Create the enquiries table
+CREATE TABLE enquiries (
+  eid INT AUTO_INCREMENT,
+  cid VARCHAR(50) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  message TEXT NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (eid),
+  FOREIGN KEY (cid) REFERENCES courses (cid)
+);
+
+
+
+-- Create the teachers table
+CREATE TABLE teachers (
+  tid INT AUTO_INCREMENT,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  tname VARCHAR(100) NOT NULL,
+  temail VARCHAR(100) NOT NULL,
+  tphone VARCHAR(20),
+  cid VARCHAR(50) NOT NULL,
+  PRIMARY KEY (tid),
+  FOREIGN KEY (cid) REFERENCES courses (cid)
+);
+
+
+
+
+
+
+INSERT INTO courses (cid, cname, cdescription) VALUES ('java', 'Java', 'Learn Java programming language.');
+INSERT INTO courses (cid, cname, cdescription) VALUES ('c', 'C', 'Learn C programming language.');
+INSERT INTO courses (cid, cname, cdescription) VALUES ('python', 'Python', 'Learn Python programming language.');
+
+
+
+
+INSERT INTO teachers (username, password, tname, temail, tphone, cid) VALUES ('admin123', 'password123', 'Admin', 'abc.123@gmail.com', '999999999', 'java');
